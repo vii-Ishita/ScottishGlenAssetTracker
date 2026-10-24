@@ -1,0 +1,14 @@
+CREATE TABLE Asset (
+assetID INT IDENTITY(1,1) PRIMARY KEY,
+systemName NVARCHAR(100) NOT NULL,
+model NVARCHAR(100) NOT NULL,
+manufacturer NVARCHAR(100) NOT NULL,
+type NVARCHAR(50) NOT NULL,
+ipAddress NVARCHAR(45) NOT NULL,
+purchaseDate DATE NULL,
+notes NVARCHAR(MAX) NULL,
+employeeID INT NOT NULL,
+CONSTRAINT FK_Asset_Employee
+	FOREIGN KEY (employeeID)
+	REFERENCES Employee(employeeID)
+);
