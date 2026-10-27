@@ -6,6 +6,7 @@ namespace ScottishGlenApp.Models
         public string lastName {get; set;} = string.Empty;
         public string email {get; set;} = string.Empty;
         public int departmentID {get; set;} = 0;
+        public string FullName => $"{firstName} {lastName}";
     }
-
+    
 }

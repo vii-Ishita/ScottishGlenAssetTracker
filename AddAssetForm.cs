@@ -1,13 +1,16 @@
 using System.Management;
 using System.Net;
 using System.Net.Sockets;
+using ScottishGlenApp.Data;
 namespace ScottishGlenApp;
 
 public partial class AddAssetForm : Form
 {
-    public AddAssetForm()
+    private readonly ScottishGlenDbContext _dbContext;
+    public AddAssetForm(ScottishGlenDbContext dbContext)
     {
         InitializeComponent();
+        _dbContext = dbContext;
         Label systemNameLabel=new Label();
         systemNameLabel.Text="System Name: ";
         systemNameLabel.Location= new Point (30,30);
@@ -75,7 +78,19 @@ public partial class AddAssetForm : Form
         notesTextBox.Height=70;
         notesTextBox.Multiline=true;
         Controls.Add(notesTextBox);
-
+        Label employeeLabel=new Label();
+        employeeLabel.Text="Assigned Employee: ";
+        employeeLabel.Location= new Point (30,360);
+        Controls.Add(employeeLabel);
+        ComboBox employeeComboBox=new ComboBox();
+        employeeComboBox.Location = new Point (150,360);
+        employeeComboBox.Width=250;
+        employeeComboBox.DropDownStyle=ComboBoxStyle.DropDownList;
+        Controls.Add(employeeComboBox);
+        var employees = _dbContext.Employees.ToList();
+        employeeComboBox.DataSource = employees;
+        employeeComboBox.DisplayMember = "FullName";
+        employeeComboBox.ValueMember = "employeeID";
         ManagementObjectSearcher searcher= new ManagementObjectSearcher("SELECT Model, Manufacturer, PCSystemType FROM Win32_ComputerSystem");
 
         var results = searcher.Get();
