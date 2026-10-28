@@ -2,6 +2,7 @@ using System.Management;
 using System.Net;
 using System.Net.Sockets;
 using ScottishGlenApp.Data;
+using ScottishGlenApp.Models;
 namespace ScottishGlenApp;
 
 public partial class AddAssetForm : Form
@@ -99,7 +100,27 @@ public partial class AddAssetForm : Form
                 return;
             }
             int selectedEmployeeID = (int)employeeComboBox.SelectedValue!;
-            MessageBox.Show($"Selected Employee ID: {selectedEmployeeID}");
+            Asset newAsset = new Asset();
+            newAsset.systemName = systemNameTextBox.Text;
+            newAsset.model=modelTextBox.Text;
+            newAsset.manufacturer = manufacturerTextBox.Text;
+            newAsset.type = typeTextBox.Text;
+            newAsset.ipAddress = ipAddressTextBox.Text;
+            if(purchaseDatePicker.Checked==true){
+                newAsset.purchaseDate =  purchaseDatePicker.Value.Date;
+            } else{
+                newAsset.purchaseDate=null;
+            }
+            newAsset.notes = notesTextBox.Text;
+            newAsset.employeeID = selectedEmployeeID;
+            try{
+                _dbContext.Assets.Add(newAsset);
+                _dbContext.SaveChanges();
+                MessageBox.Show($"Asset saved successfully! Asset ID: {newAsset.assetID}");
+            } catch (Exception ex){
+                MessageBox.Show("Failed to save asset: "+ ex.Message);
+            }
+
         };
         var employees = _dbContext.Employees.ToList();
         employeeComboBox.DataSource = employees;
