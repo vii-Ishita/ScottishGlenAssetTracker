@@ -22,6 +22,6 @@ static class Program
         var optionsBuilder = new DbContextOptionsBuilder<ScottishGlenDbContext>();
         optionsBuilder.UseSqlServer(connectionString);
         using var dbContext = new ScottishGlenDbContext(optionsBuilder.Options);
-        Application.Run(new AddAssetForm(dbContext));
+        Application.Run(new DashboardForm( ));
     }    
 }

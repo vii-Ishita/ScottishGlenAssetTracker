@@ -1,0 +1,61 @@
+namespace ScottishGlenApp;
+public partial class DashboardForm: Form{
+    public DashboardForm(){
+        Text = "ScottishGlen - Dashboard";
+        Size = new Size(1000,650);
+        StartPosition= FormStartPosition.CenterScreen;
+        Panel sidebarPanel = new Panel();
+        sidebarPanel.BackColor = Color.FromArgb(25, 40, 65);
+        sidebarPanel.Dock = DockStyle.Left;
+        sidebarPanel.Width = 220;
+        Controls.Add(sidebarPanel);
+        Label brandLabel = new Label();
+        brandLabel.Text = "ScottishGlen";
+        brandLabel.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+        brandLabel.ForeColor = Color.White;
+        brandLabel.Location = new Point(20,25);
+        brandLabel.AutoSize = true;
+        sidebarPanel.Controls.Add(brandLabel);
+        Button dashboardButton = new Button();
+        dashboardButton.Text = "Dashboard";
+        dashboardButton.Location = new Point(20, 110);
+        dashboardButton.Size = new Size (180, 45);
+        dashboardButton.FlatStyle = FlatStyle.Flat;
+        dashboardButton.FlatAppearance.BorderSize=0;
+        dashboardButton.BackColor = Color.FromArgb(45, 65, 95);
+        dashboardButton.ForeColor = Color.White;
+        dashboardButton.Font = new Font("Segoe UI", 11);
+        sidebarPanel.Controls.Add(dashboardButton);
+        Button AssetButton = new Button();
+        AssetButton.Text = "Assets";
+        AssetButton.Location = new Point(20, 165);
+        AssetButton.Size = new Size (180, 45);
+        AssetButton.FlatStyle = FlatStyle.Flat;
+        AssetButton.FlatAppearance.BorderSize=0;
+        AssetButton.BackColor = Color.FromArgb(25, 40, 65);
+        AssetButton.ForeColor = Color.White;
+        AssetButton.Font = new Font("Segoe UI", 11);
+        sidebarPanel.Controls.Add(AssetButton);
+        Button EmployeeButton = new Button();
+        EmployeeButton.Text = "Employees";
+        EmployeeButton.Location = new Point(20, 220);
+        EmployeeButton.Size = new Size (180, 45);
+        EmployeeButton.FlatStyle = FlatStyle.Flat;
+        EmployeeButton.FlatAppearance.BorderSize=0;
+        EmployeeButton.BackColor = Color.FromArgb(25, 40, 65);
+        EmployeeButton.ForeColor = Color.White;
+        EmployeeButton.Font = new Font("Segoe UI", 11);
+        sidebarPanel.Controls.Add(EmployeeButton);
+        Button DepartmentButton = new Button();
+        DepartmentButton.Text = "Departments";
+        DepartmentButton.Location = new Point(20, 275);
+        DepartmentButton.Size = new Size (180, 45);
+        DepartmentButton.FlatStyle = FlatStyle.Flat;
+        DepartmentButton.FlatAppearance.BorderSize=0;
+        DepartmentButton.BackColor = Color.FromArgb(25, 40, 65);
+        DepartmentButton.ForeColor = Color.White;
+        DepartmentButton.Font = new Font("Segoe UI", 11);
+        sidebarPanel.Controls.Add(DepartmentButton);
+      
+    }
+}
