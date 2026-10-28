@@ -87,10 +87,25 @@ public partial class AddAssetForm : Form
         employeeComboBox.Width=250;
         employeeComboBox.DropDownStyle=ComboBoxStyle.DropDownList;
         Controls.Add(employeeComboBox);
+        Button saveAssetButton = new Button();
+        saveAssetButton.Text = "Save Asset";
+        saveAssetButton.Location = new Point (130, 410);
+        saveAssetButton.Width=120;
+        Controls.Add(saveAssetButton);
+        saveAssetButton.Click += (sender, e)=>
+        {
+            if(employeeComboBox.SelectedItem==null){
+                MessageBox.Show("Please select an employee.");
+                return;
+            }
+            int selectedEmployeeID = (int)employeeComboBox.SelectedValue!;
+            MessageBox.Show($"Selected Employee ID: {selectedEmployeeID}");
+        };
         var employees = _dbContext.Employees.ToList();
         employeeComboBox.DataSource = employees;
         employeeComboBox.DisplayMember = "FullName";
         employeeComboBox.ValueMember = "employeeID";
+
         ManagementObjectSearcher searcher= new ManagementObjectSearcher("SELECT Model, Manufacturer, PCSystemType FROM Win32_ComputerSystem");
 
         var results = searcher.Get();
@@ -109,9 +124,9 @@ public partial class AddAssetForm : Form
         var ipAddresses=Dns.GetHostAddresses(Dns.GetHostName());
         foreach (var ip in ipAddresses){
             if(ip.AddressFamily==AddressFamily.InterNetwork){
-            ipAddressTextBox.Text=ip.ToString();
-            break;
-             }
+                ipAddressTextBox.Text=ip.ToString();
+                break;
+            }
         }
         
     }
