@@ -8,6 +8,11 @@ public partial class DashboardForm: Form{
         int totalEmployees = _dbContext.Employees.Count();
         int totalDepartments = _dbContext.Departments.Count();
         int assignedAssets = _dbContext.Assets.Count(a=> a.employeeID != 0);
+        var recentAssets = _dbContext.Assets
+            .OrderByDescending(a=>a.assetID)
+            .Take(5)
+            .ToList();
+
         Text = "ScottishGlen - Dashboard";
         Size = new Size(1000,650);
         BackColor = Color.FromArgb(245, 247, 250);
@@ -185,12 +190,62 @@ public partial class DashboardForm: Form{
         assignedAssetsNumber.Location = new Point(25, 55);
         assignedAssetsNumber.AutoSize = true;
         assignedAssetsCard.Controls.Add(assignedAssetsNumber);
-        AssetButton.Click += (sender, e)=>
+        DataGridView recentAssetsTable = new DataGridView();
+        recentAssetsTable.Location = new Point(260, 440);
+        recentAssetsTable.Size = new Size(1000, 140);
+        recentAssetsTable.BackgroundColor = Color.White;
+        recentAssetsTable.BorderStyle = BorderStyle.FixedSingle;
+        recentAssetsTable.ReadOnly = true;
+        recentAssetsTable.AllowUserToAddRows = false;
+        recentAssetsTable.RowHeadersVisible = false;
+        recentAssetsTable.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        recentAssetsTable.EnableHeadersVisualStyles = false;
+        recentAssetsTable.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(25, 40, 65);
+        recentAssetsTable.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+        recentAssetsTable.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+        recentAssetsTable.ColumnHeadersHeight = 35;
+        recentAssetsTable.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+        recentAssetsTable.DefaultCellStyle.Font = new Font("Segoe UI", 10);;
+        recentAssetsTable.RowTemplate.Height = 32;
+        recentAssetsTable.DefaultCellStyle.SelectionBackColor = Color.FromArgb(220, 230, 245);
+        recentAssetsTable.DefaultCellStyle.SelectionForeColor = Color.FromArgb(25,40, 65);
+        recentAssetsTable.DefaultCellStyle.ForeColor = Color.FromArgb(25, 40, 65);
+        recentAssetsTable.DefaultCellStyle.BackColor = Color.White;
+        recentAssetsTable.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(245, 247, 250);
+        recentAssetsTable.DataSource = recentAssets
+            .Select(a => new{
+                AssetID = a.assetID,
+                SystemName = a.systemName,
+                Type = a.type,
+                Manufacturer = a.manufacturer,
+                Model = a.model,
+                PurchaseDate = a.purchaseDate?.ToString("dd/MM/yyyy")?? "Not specified",
+                Notes = a.notes
+            })
+            .ToList();
+        Controls.Add(recentAssetsTable);
+         AssetButton.Click += (sender, e)=>
         {
             AddAssetForm addAssetForm = new AddAssetForm(_dbContext);
             addAssetForm.ShowDialog();
             totalAssetsNumber.Text = _dbContext.Assets.Count().ToString();
             assignedAssetsNumber.Text = _dbContext.Assets.Count(a=>a.employeeID !=0).ToString();
+            recentAssetsTable.DataSource = _dbContext.Assets
+                .OrderByDescending(a=>a.assetID)
+                .Take(5)
+                .ToList()
+                .Select(a=>new
+                {
+                    AssetID = a.assetID,
+                    SystemName = a.systemName,
+                    Type = a.type,
+                    Manufacturer = a.manufacturer,
+                    Model = a.model,
+                    PurchaseDate = a.purchaseDate?.ToString("dd/MM/yyyy")?? "Not specified",
+                    Notes = a.notes
+                })
+                .ToList();
         };
+
     }
 }
