@@ -53,6 +53,14 @@ public partial class DashboardForm: Form{
         EmployeeButton.BackColor = Color.FromArgb(25, 40, 65);
         EmployeeButton.ForeColor = Color.White;
         EmployeeButton.Font = new Font("Segoe UI", 11);
+        EmployeeButton.Click += (sender, e) =>{
+            MessageBox.Show(
+                "Employess management is not available in this prototype.",
+                "ScottishGlen",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        };
         sidebarPanel.Controls.Add(EmployeeButton);
         Button DepartmentButton = new Button();
         DepartmentButton.Text = "Departments";
@@ -63,6 +71,15 @@ public partial class DashboardForm: Form{
         DepartmentButton.BackColor = Color.FromArgb(25, 40, 65);
         DepartmentButton.ForeColor = Color.White;
         DepartmentButton.Font = new Font("Segoe UI", 11);
+        DepartmentButton.Click += (sender, e) =>
+        {
+            MessageBox.Show(
+                "Department management is not available in this prototype.",
+                "ScottishGlen",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+        };
         sidebarPanel.Controls.Add(DepartmentButton);
         Panel totalAssetsCard = new Panel();
         totalAssetsCard.Location = new Point(260, 100);
@@ -168,5 +185,12 @@ public partial class DashboardForm: Form{
         assignedAssetsNumber.Location = new Point(25, 55);
         assignedAssetsNumber.AutoSize = true;
         assignedAssetsCard.Controls.Add(assignedAssetsNumber);
+        AssetButton.Click += (sender, e)=>
+        {
+            AddAssetForm addAssetForm = new AddAssetForm(_dbContext);
+            addAssetForm.ShowDialog();
+            totalAssetsNumber.Text = _dbContext.Assets.Count().ToString();
+            assignedAssetsNumber.Text = _dbContext.Assets.Count(a=>a.employeeID !=0).ToString();
+        };
     }
 }
