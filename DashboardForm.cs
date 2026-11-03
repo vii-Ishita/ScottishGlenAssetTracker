@@ -14,7 +14,7 @@ public partial class DashboardForm: Form{
             .ToList();
 
         Text = "ScottishGlen - Dashboard";
-        Size = new Size(1000,650);
+        Size = new Size(1500,850);
         BackColor = Color.FromArgb(245, 247, 250);
         StartPosition= FormStartPosition.CenterScreen;
         Panel sidebarPanel = new Panel();
@@ -39,6 +39,31 @@ public partial class DashboardForm: Form{
         dashboardButton.ForeColor = Color.White;
         dashboardButton.Font = new Font("Segoe UI", 11);
         sidebarPanel.Controls.Add(dashboardButton);
+        Label dashboardTitle = new Label();
+        dashboardTitle.Text = "Dashboard Overview";
+        dashboardTitle.Font = new Font("Segoe UI", 22, FontStyle.Bold);
+        dashboardTitle.ForeColor = Color.FromArgb(25,40,65);
+        dashboardTitle.Location = new Point(260, 55);
+        dashboardTitle.AutoSize = true;
+        Controls.Add(dashboardTitle);
+        Label dashboardSubtitle = new Label();
+        dashboardSubtitle.Text = "ScottishGlen Asset Tracking System";
+        dashboardSubtitle.Font = new Font("Segoe UI", 11, FontStyle.Regular);
+        dashboardSubtitle.ForeColor = Color.FromArgb(110, 120, 135);
+        dashboardSubtitle.Location = new Point(262, 105);
+        dashboardSubtitle.AutoSize = true;
+        Controls.Add(dashboardSubtitle);
+        Button addNewAssetButton = new Button();
+        addNewAssetButton.Text = "+ Add New Asset";
+        addNewAssetButton.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+        addNewAssetButton.ForeColor = Color.White;
+        addNewAssetButton.BackColor = Color.FromArgb(25, 40, 65);
+        addNewAssetButton.FlatStyle = FlatStyle.Flat;
+        addNewAssetButton.FlatAppearance.BorderSize = 0;
+        addNewAssetButton.Size = new Size(180,45);
+        addNewAssetButton.Location = new Point(1100, 75);
+        addNewAssetButton.Cursor = Cursors.Hand;
+        Controls.Add(addNewAssetButton);
         Button AssetButton = new Button();
         AssetButton.Text = "Assets";
         AssetButton.Location = new Point(20, 165);
@@ -87,14 +112,14 @@ public partial class DashboardForm: Form{
         };
         sidebarPanel.Controls.Add(DepartmentButton);
         Panel totalAssetsCard = new Panel();
-        totalAssetsCard.Location = new Point(260, 100);
-        totalAssetsCard.Size = new Size(300, 130);
+        totalAssetsCard.Location = new Point(260, 180);
+        totalAssetsCard.Size = new Size(290, 130);
         totalAssetsCard.BackColor = Color.White;
         totalAssetsCard.BorderStyle = BorderStyle.None;
         Controls.Add(totalAssetsCard);
         Panel cardBorder = new Panel();
-        cardBorder.Location = new Point(259, 99);
-        cardBorder.Size = new Size(302, 132);
+        cardBorder.Location = new Point(259, 179);
+        cardBorder.Size = new Size(292, 132);
         cardBorder.BackColor = Color.FromArgb(225, 230, 235);
         Controls.Add(cardBorder);
         cardBorder.SendToBack();
@@ -113,14 +138,14 @@ public partial class DashboardForm: Form{
         totalAssetsNumber.AutoSize = true;
         totalAssetsCard.Controls.Add(totalAssetsNumber);
         Panel totalEmployeesCard = new Panel();
-        totalEmployeesCard.Location = new Point(590, 100);
-        totalEmployeesCard.Size = new Size(300, 130);
+        totalEmployeesCard.Location = new Point(570, 180);
+        totalEmployeesCard.Size = new Size(290, 130);
         totalEmployeesCard.BackColor = Color.White;
         totalEmployeesCard.BorderStyle = BorderStyle.None;
         Controls.Add(totalEmployeesCard);
         Panel totalEmployeesCardBorder = new Panel();
-        totalEmployeesCardBorder.Location = new Point(589, 99);
-        totalEmployeesCardBorder.Size = new Size(302, 132);
+        totalEmployeesCardBorder.Location = new Point(569, 179);
+        totalEmployeesCardBorder.Size = new Size(292, 132);
         totalEmployeesCardBorder.BackColor = Color.FromArgb(225, 230, 235);
         Controls.Add(totalEmployeesCardBorder);
         totalEmployeesCardBorder.SendToBack();
@@ -139,14 +164,14 @@ public partial class DashboardForm: Form{
         totalEmployeesNumber.AutoSize = true;
         totalEmployeesCard.Controls.Add(totalEmployeesNumber);
         Panel totalDepartmentsCard = new Panel();
-        totalDepartmentsCard.Location = new Point(260, 260);
-        totalDepartmentsCard.Size = new Size(300, 130);
+        totalDepartmentsCard.Location = new Point(880, 180);
+        totalDepartmentsCard.Size = new Size(290, 130);
         totalDepartmentsCard.BackColor = Color.White;
         totalDepartmentsCard.BorderStyle = BorderStyle.None;
         Controls.Add(totalDepartmentsCard);
         Panel totalDepartmentsCardBorder = new Panel();
-        totalDepartmentsCardBorder.Location = new Point(259, 259);
-        totalDepartmentsCardBorder.Size = new Size(302, 132);
+        totalDepartmentsCardBorder.Location = new Point(879, 179);
+        totalDepartmentsCardBorder.Size = new Size(292, 132);
         totalDepartmentsCardBorder.BackColor = Color.FromArgb(225, 230, 235);
         Controls.Add(totalDepartmentsCardBorder);
         totalDepartmentsCardBorder.SendToBack();
@@ -165,14 +190,14 @@ public partial class DashboardForm: Form{
         totalDepartmentsNumber.AutoSize = true;
         totalDepartmentsCard.Controls.Add(totalDepartmentsNumber);
         Panel assignedAssetsCard = new Panel();
-        assignedAssetsCard.Location = new Point(590, 260);
-        assignedAssetsCard.Size = new Size(300, 130);
+        assignedAssetsCard.Location = new Point(1190, 180);
+        assignedAssetsCard.Size = new Size(290, 130);
         assignedAssetsCard.BackColor = Color.White;
         assignedAssetsCard.BorderStyle = BorderStyle.None;
         Controls.Add(assignedAssetsCard);
         Panel assignedAssetsCardBorder = new Panel();
-        assignedAssetsCardBorder.Location = new Point(589, 259);
-        assignedAssetsCardBorder.Size = new Size(302, 132);
+        assignedAssetsCardBorder.Location = new Point(1189, 179);
+        assignedAssetsCardBorder.Size = new Size(292, 132);
         assignedAssetsCardBorder.BackColor = Color.FromArgb(225, 230, 235);
         Controls.Add(assignedAssetsCardBorder);
         assignedAssetsCardBorder.SendToBack();
@@ -190,9 +215,23 @@ public partial class DashboardForm: Form{
         assignedAssetsNumber.Location = new Point(25, 55);
         assignedAssetsNumber.AutoSize = true;
         assignedAssetsCard.Controls.Add(assignedAssetsNumber);
+        Label recentAssetsTitle = new Label();
+        recentAssetsTitle.Text = "Recently Added Assets";
+        recentAssetsTitle.Font = new Font("Segoe UI", 16, FontStyle.Bold);
+        recentAssetsTitle.ForeColor = Color.FromArgb(25, 40, 65);
+        recentAssetsTitle.Location = new Point(260, 365);
+        recentAssetsTitle.AutoSize = true;
+        Controls.Add(recentAssetsTitle);
+        Label recentAssetsSubtitle = new Label();
+        recentAssetsSubtitle.Text = "The five most recently registered assets";
+        recentAssetsSubtitle.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+        recentAssetsSubtitle.ForeColor = Color.FromArgb(110, 120, 135);
+        recentAssetsSubtitle.Location = new Point(262, 400);
+        recentAssetsSubtitle.AutoSize = true;
+        Controls.Add(recentAssetsSubtitle);
         DataGridView recentAssetsTable = new DataGridView();
         recentAssetsTable.Location = new Point(260, 440);
-        recentAssetsTable.Size = new Size(1000, 140);
+        recentAssetsTable.Size = new Size(1200, 140);
         recentAssetsTable.BackgroundColor = Color.White;
         recentAssetsTable.BorderStyle = BorderStyle.FixedSingle;
         recentAssetsTable.ReadOnly = true;
@@ -245,6 +284,10 @@ public partial class DashboardForm: Form{
                     Notes = a.notes
                 })
                 .ToList();
+        };
+        addNewAssetButton.Click += (sender, e) =>
+        {
+            AssetButton.PerformClick();
         };
 
     }
