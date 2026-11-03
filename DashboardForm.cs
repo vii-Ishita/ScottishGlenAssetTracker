@@ -265,6 +265,11 @@ public partial class DashboardForm: Form{
         Controls.Add(recentAssetsTable);
          AssetButton.Click += (sender, e)=>
         {
+            AssetsForm assetsForm = new AssetsForm(_dbContext);
+            assetsForm.ShowDialog();
+        };
+        addNewAssetButton.Click += (sender, e) =>
+        {
             AddAssetForm addAssetForm = new AddAssetForm(_dbContext);
             addAssetForm.ShowDialog();
             totalAssetsNumber.Text = _dbContext.Assets.Count().ToString();
@@ -284,10 +289,6 @@ public partial class DashboardForm: Form{
                     Notes = a.notes
                 })
                 .ToList();
-        };
-        addNewAssetButton.Click += (sender, e) =>
-        {
-            AssetButton.PerformClick();
         };
 
     }
