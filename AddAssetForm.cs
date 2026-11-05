@@ -12,6 +12,19 @@ public partial class AddAssetForm : Form
     {
         InitializeComponent();
         _dbContext = dbContext;
+        Text = "ScottishGlen - Add Asset";
+        Size = new Size(750, 700);
+        StartPosition = FormStartPosition.CenterScreen;
+        BackColor = Color.FromArgb(245, 247, 250);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
+        MaximizeBox = false;
+        Label title = new Label();
+        title.Text = "Add New Asset";
+        title.Font = new Font("Segoe UI", 24, FontStyle.Bold);
+        title.ForeColor = Color.FromArgb(25, 40, 65);
+        title.Location = new Point(30, 20);
+        title.AutoSize = true;
+        Controls.Add(title);
         Label systemNameLabel=new Label();
         systemNameLabel.Text="System Name: ";
         systemNameLabel.Location= new Point (30,30);
@@ -90,9 +103,29 @@ public partial class AddAssetForm : Form
         Controls.Add(employeeComboBox);
         Button saveAssetButton = new Button();
         saveAssetButton.Text = "Save Asset";
-        saveAssetButton.Location = new Point (130, 410);
-        saveAssetButton.Width=120;
+        saveAssetButton.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+        saveAssetButton.ForeColor = Color.White;
+        saveAssetButton.BackColor = Color.FromArgb(25, 40, 65);
+        saveAssetButton.FlatStyle = FlatStyle.Flat;
+        saveAssetButton.FlatAppearance.BorderSize = 0;
+        saveAssetButton.Size = new Size(180, 45);
+        saveAssetButton.Cursor = Cursors.Hand;
+        saveAssetButton.Location = new Point (220, 420);
         Controls.Add(saveAssetButton);
+        foreach (Control control in Controls){
+            if(control != title){
+                control.Top += 75;
+            }
+            if (control is Label label && control !=title){
+                label.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+                label.ForeColor = Color.FromArgb(25, 40, 65);
+                label.AutoSize = true;
+            }
+            if (control is TextBox || control is ComboBox || control is DateTimePicker){
+                control.Left = 220;
+            }
+        }
+        
         saveAssetButton.Click += (sender, e)=>
         {
             if(employeeComboBox.SelectedItem==null){

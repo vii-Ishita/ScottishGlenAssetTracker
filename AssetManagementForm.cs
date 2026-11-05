@@ -131,6 +131,15 @@ public class AssetManagementForm : Form{
         deleteAssetDescription.Location = new Point(25, 85);
         deleteAssetDescription.AutoSize = true;
         deleteAssetCard.Controls.Add(deleteAssetDescription);
+        EventHandler openDeleteAsset = (sender, e)=>
+        {
+            using (DeleteAssetForm deleteAssetForm = new DeleteAssetForm(_dbContext)){
+                deleteAssetForm.ShowDialog();
+            }
+        };
+        deleteAssetCard.Click +=openDeleteAsset;
+        deleteAssetTitle.Click += openDeleteAsset;
+        deleteAssetDescription.Click +=openDeleteAsset;
 
     
     }
