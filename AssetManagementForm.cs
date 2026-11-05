@@ -101,6 +101,15 @@ public class AssetManagementForm : Form{
         editAssetDescription.Location = new Point(25, 85);
         editAssetDescription.AutoSize = true;
         editAssetCard.Controls.Add(editAssetDescription);
+        EventHandler openEditAsset = (sender, e)=>
+        {
+            using (EditAssetForm editAssetForm = new EditAssetForm(_dbContext)){
+                editAssetForm.ShowDialog();
+            }
+        };
+        editAssetCard.Click +=openEditAsset;
+        editAssetTitle.Click += openEditAsset;
+        editAssetDescription.Click += openEditAsset;
         Panel deleteAssetCard = new Panel();
         deleteAssetCard.Location = new Point(600, 350);
         deleteAssetCard.Size = new Size(500, 180);
@@ -123,6 +132,6 @@ public class AssetManagementForm : Form{
         deleteAssetDescription.AutoSize = true;
         deleteAssetCard.Controls.Add(deleteAssetDescription);
 
-        
+    
     }
 }

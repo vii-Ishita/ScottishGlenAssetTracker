@@ -17,17 +17,6 @@ public class AssetsForm : Form{
         assetsTitle.AutoSize = true;
         Controls.Add(assetsTitle);
 
-        Button addAssetButton = new Button();
-        addAssetButton.Text = "+ Add Asset";
-        addAssetButton.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-        addAssetButton.ForeColor = Color.White;
-        addAssetButton.BackColor = Color.FromArgb(25, 40, 65);
-        addAssetButton.FlatStyle = FlatStyle.Flat;
-        addAssetButton.FlatAppearance.BorderSize = 0;
-        addAssetButton.Size = new Size(250, 70);
-        addAssetButton.Location = new Point(40, 130);
-        addAssetButton.Cursor = Cursors.Hand;
-        Controls.Add(addAssetButton);
         var allAssets = _dbContext.Assets
             .OrderBy(a => a.assetID)
             .ToList();
@@ -66,30 +55,6 @@ public class AssetsForm : Form{
                 .FirstOrDefault() ?? "Unassigned"
         }).ToList();
         Controls.Add(assetsTable);
-        addAssetButton.Click += (sender, e) => {
-            AddAssetForm addAssetForm = new AddAssetForm(_dbContext);
-            addAssetForm.ShowDialog();
-            var updatedAssets = _dbContext.Assets
-                .OrderBy(a=>a.assetID)
-                .ToList();
-            var updatedEmployees = _dbContext.Employees.ToList();
-            assetsTable.DataSource = updatedAssets.Select(a=> new
-            {
-                AssetID = a.assetID,
-                SystemName = a.systemName,
-                Type = a.type,
-                Manufacturer = a.manufacturer,
-                Model = a.model,
-                IPAddress = a.ipAddress,
-                PurchaseDate = a.purchaseDate?.ToString("dd/MM/yyyy")?? "Not specified",
-                Notes = a.notes,
-                AssignedEmployee = updatedEmployees
-                    .Where(e=>e.employeeID == a.employeeID)
-                    .Select(e=>e.firstName + "" + e.lastName)
-                    .FirstOrDefault() ?? "Unassigned"
-                
-            }).ToList();
-        };
         Text = "ScottishGlen - Assets";
         Size = new Size(1200, 750);
         StartPosition = FormStartPosition.CenterScreen;
