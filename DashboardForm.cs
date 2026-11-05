@@ -84,12 +84,11 @@ public partial class DashboardForm: Form{
         EmployeeButton.ForeColor = Color.White;
         EmployeeButton.Font = new Font("Segoe UI", 11);
         EmployeeButton.Click += (sender, e) =>{
-            MessageBox.Show(
-                "Employess management is not available in this prototype.",
-                "ScottishGlen",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+              using(EmployeeManagementForm employeeManagementForm = new EmployeeManagementForm(_dbContext)){
+                employeeManagementForm.ShowDialog();
+              }
+            
+        
         };
         sidebarPanel.Controls.Add(EmployeeButton);
         Button DepartmentButton = new Button();
@@ -265,8 +264,8 @@ public partial class DashboardForm: Form{
         Controls.Add(recentAssetsTable);
          AssetButton.Click += (sender, e)=>
         {
-            AssetsForm assetsForm = new AssetsForm(_dbContext);
-            assetsForm.ShowDialog();
+            AssetManagementForm assetManagementForm = new AssetManagementForm(_dbContext);
+            assetManagementForm.ShowDialog();
         };
         addNewAssetButton.Click += (sender, e) =>
         {
