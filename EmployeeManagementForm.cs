@@ -43,15 +43,10 @@ public class EmployeeManagementForm : Form{
         addEmployeeCard.Controls.Add(addEmployeeDescription);
         EventHandler openAddEmployee = (sender, e) =>
         {
-            /*using (AddEmployeeForm addEmployeeForm = new AddEmployeeForm(_dbContext)){
+            using (AddEmployeeForm addEmployeeForm = new AddEmployeeForm(_dbContext)){
                 addEmployeeForm.ShowDialog();
-            }*/
-            MessageBox.Show(
-                "Add employee function",
-                "ScottishGlen Asset Tracker",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            }
+    
         };
         addEmployeeCard.Click +=openAddEmployee;
         addEmployeeTitle.Click +=openAddEmployee;
