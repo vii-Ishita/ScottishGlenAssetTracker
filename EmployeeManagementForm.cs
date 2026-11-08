@@ -21,8 +21,8 @@ public class EmployeeManagementForm : Form{
         title.AutoSize = true;
         Controls.Add(title);
         Panel addEmployeeCard = new Panel();
-        addEmployeeCard.Location = new Point(50, 130);
-        addEmployeeCard.Size = new Size(500, 180);
+        addEmployeeCard.Location = new Point(50, 180);
+        addEmployeeCard.Size = new Size(340, 180);
         addEmployeeCard.BackColor = Color.White;
         addEmployeeCard.BorderStyle = BorderStyle.FixedSingle;
         addEmployeeCard.Cursor = Cursors.Hand;
@@ -51,58 +51,22 @@ public class EmployeeManagementForm : Form{
         addEmployeeCard.Click +=openAddEmployee;
         addEmployeeTitle.Click +=openAddEmployee;
         addEmployeeDescription.Click += openAddEmployee;
-        Panel viewEmployeesCard = new Panel();
-        viewEmployeesCard.Location = new Point(600, 130);
-        viewEmployeesCard.Size = new Size(500, 180);
-        viewEmployeesCard.BackColor = Color.White;
-        viewEmployeesCard.BorderStyle = BorderStyle.FixedSingle;
-        viewEmployeesCard.Cursor = Cursors.Hand;
-        Controls.Add(viewEmployeesCard);
-        Label viewEmployeesTitle = new Label();
-        viewEmployeesTitle.Text = "View All Employees";
-        viewEmployeesTitle.Font = new Font("Segoe UI", 18, FontStyle.Bold);
-        viewEmployeesTitle.ForeColor = Color.FromArgb(25, 40, 65);
-        viewEmployeesTitle.Location = new Point(25, 35);
-        viewEmployeesTitle.AutoSize = true;
-        viewEmployeesCard.Controls.Add(viewEmployeesTitle);
-        Label viewEmployeesDescription = new Label();
-        viewEmployeesDescription.Text = "View all registered employees";
-        viewEmployeesDescription.Font = new Font("Segoe UI", 11);
-        viewEmployeesDescription.ForeColor = Color.Gray;
-        viewEmployeesDescription.Location = new Point(25, 85);
-        viewEmployeesDescription.AutoSize = true;
-        viewEmployeesCard.Controls.Add(viewEmployeesDescription);
-        EventHandler openViewEmployees = (sender, e) =>
-        {
-            /*using (EmployeesForm employeesForm = new EmployeesForm(_dbContext)){
-                employeesForm.ShowDialog();
-            }*/
-             MessageBox.Show(
-                "View employees function",
-                "ScottishGlen Asset Tracker",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
-        };
-        viewEmployeesCard.Click +=openViewEmployees;
-        viewEmployeesTitle.Click +=openViewEmployees;
-        viewEmployeesDescription.Click += openViewEmployees;
         Panel editEmployeeCard = new Panel();
-        editEmployeeCard.Location = new Point(50, 350);
-        editEmployeeCard.Size = new Size(500, 180);
+        editEmployeeCard.Location = new Point(420, 180);
+        editEmployeeCard.Size = new Size(340, 180);
         editEmployeeCard.BackColor = Color.White;
         editEmployeeCard.BorderStyle = BorderStyle.FixedSingle;
         editEmployeeCard.Cursor = Cursors.Hand;
         Controls.Add(editEmployeeCard);
         Label editEmployeeTitle = new Label();
-        editEmployeeTitle.Text = "Edit Employee Details";
+        editEmployeeTitle.Text = "Edit Employee";
         editEmployeeTitle.Font = new Font("Segoe UI", 18, FontStyle.Bold);
         editEmployeeTitle.ForeColor = Color.FromArgb(25, 40, 65);
         editEmployeeTitle.Location = new Point(25, 35);
         editEmployeeTitle.AutoSize = true;
         editEmployeeCard.Controls.Add(editEmployeeTitle);
         Label editEmployeeDescription = new Label();
-        editEmployeeDescription.Text = "Update existing employee information";
+        editEmployeeDescription.Text = "Update employee information";
         editEmployeeDescription.Font = new Font("Segoe UI", 11);
         editEmployeeDescription.ForeColor = Color.Gray;
         editEmployeeDescription.Location = new Point(25, 85);
@@ -110,22 +74,16 @@ public class EmployeeManagementForm : Form{
         editEmployeeCard.Controls.Add(editEmployeeDescription);
         EventHandler openEditEmployee = (sender, e)=>
         {
-            /*using (EditEmployeeForm editEmployeeForm = new EditEmployeeForm(_dbContext)){
+            using (EditEmployeeForm editEmployeeForm = new EditEmployeeForm(_dbContext)){
                 editEmployeeForm.ShowDialog();
-            }*/
-             MessageBox.Show(
-                "Edit employee function",
-                "ScottishGlen Asset Tracker",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            }
         };
         editEmployeeCard.Click +=openEditEmployee;
         editEmployeeTitle.Click += openEditEmployee;
         editEmployeeDescription.Click += openEditEmployee;
         Panel deleteEmployeeCard = new Panel();
-        deleteEmployeeCard.Location = new Point(600, 350);
-        deleteEmployeeCard.Size = new Size(500, 180);
+        deleteEmployeeCard.Location = new Point(790, 180);
+        deleteEmployeeCard.Size = new Size(340, 180);
         deleteEmployeeCard.BackColor = Color.White;
         deleteEmployeeCard.BorderStyle = BorderStyle.FixedSingle;
         deleteEmployeeCard.Cursor = Cursors.Hand;
@@ -138,7 +96,7 @@ public class EmployeeManagementForm : Form{
         deleteEmployeeTitle.AutoSize = true;
         deleteEmployeeCard.Controls.Add( deleteEmployeeTitle);
         Label deleteEmployeeDescription = new Label();
-        deleteEmployeeDescription.Text = "Remove an existing company employee";
+        deleteEmployeeDescription.Text = "Remove an employee";
         deleteEmployeeDescription.Font = new Font("Segoe UI", 11);
         deleteEmployeeDescription.ForeColor = Color.Gray;
         deleteEmployeeDescription.Location = new Point(25, 85);
@@ -146,15 +104,9 @@ public class EmployeeManagementForm : Form{
         deleteEmployeeCard.Controls.Add(deleteEmployeeDescription);
         EventHandler openDeleteEmployee = (sender, e)=>
         {
-            /*using (DeleteEmployeeForm deleteEmployeeForm = new DeleteEmployeeForm(_dbContext)){
+            using (DeleteEmployeeForm deleteEmployeeForm = new DeleteEmployeeForm(_dbContext)){
                 deleteEmployeeForm.ShowDialog();
-            }*/
-             MessageBox.Show(
-                "Delete employee function",
-                "ScottishGlen Asset Tracker",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            }
         };
         deleteEmployeeCard.Click +=openDeleteEmployee;
         deleteEmployeeTitle.Click += openDeleteEmployee;
