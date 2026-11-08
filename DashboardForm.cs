@@ -102,12 +102,8 @@ public partial class DashboardForm: Form{
         DepartmentButton.Font = new Font("Segoe UI", 11);
         DepartmentButton.Click += (sender, e) =>
         {
-            MessageBox.Show(
-                "Department management is not available in this prototype.",
-                "ScottishGlen",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            DepartmentsForm departmentsForm = new DepartmentsForm(_dbContext);
+            departmentsForm.ShowDialog();
         };
         sidebarPanel.Controls.Add(DepartmentButton);
         Panel totalAssetsCard = new Panel();
