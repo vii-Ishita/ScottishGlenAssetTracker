@@ -112,6 +112,7 @@ public partial class AddAssetForm : Form
         saveAssetButton.Cursor = Cursors.Hand;
         saveAssetButton.Location = new Point (220, 420);
         Controls.Add(saveAssetButton);
+        //Apply consistent styling and positiing to the form controls
         foreach (Control control in Controls){
             if(control != title){
                 control.Top += 75;
@@ -125,7 +126,7 @@ public partial class AddAssetForm : Form
                 control.Left = 220;
             }
         }
-        
+        //Validate the employee selection and handle saving a new asset
         saveAssetButton.Click += (sender, e)=>
         {
             if(employeeComboBox.SelectedItem==null){
@@ -146,6 +147,7 @@ public partial class AddAssetForm : Form
             }
             newAsset.notes = notesTextBox.Text;
             newAsset.employeeID = selectedEmployeeID;
+            //Save the asset to the database and display the result
             try{
                 _dbContext.Assets.Add(newAsset);
                 _dbContext.SaveChanges();
@@ -155,26 +157,21 @@ public partial class AddAssetForm : Form
             }
 
         };
+        //Load employees from the database into the assignment dropdown
         var employees = _dbContext.Employees.ToList();
         employeeComboBox.DataSource = employees;
         employeeComboBox.DisplayMember = "FullName";
         employeeComboBox.ValueMember = "employeeID";
-
-        ManagementObjectSearcher searcher= new ManagementObjectSearcher("SELECT Model, Manufacturer, PCSystemType FROM Win32_ComputerSystem");
+        //Automatically retireve the computer's model, manufacturer and system type
+        ManagementObjectSearcher searcher= new ManagementObjectSearcher("SELECT Model, Manufacturer, SystemType FROM Win32_ComputerSystem");
 
         var results = searcher.Get();
         foreach(ManagementObject computer in results){
             modelTextBox.Text = computer["Model"]?.ToString()??string.Empty;
             manufacturerTextBox.Text = computer["Manufacturer"]?.ToString()??string.Empty;
-            int pcType=Convert.ToInt32(computer["PCSystemType"]);
-            if(pcType==1){
-                typeTextBox.Text="Desktop";
-            }else if(pcType==2){
-                typeTextBox.Text="Laptop";
-            }else{
-                typeTextBox.Text="Other";
-            }
+            typeTextBox.Text = computer["SystemType"]?.ToString()??string.Empty;
         }
+        //Find the computer's IPv4 address
         var ipAddresses=Dns.GetHostAddresses(Dns.GetHostName());
         foreach (var ip in ipAddresses){
             if(ip.AddressFamily==AddressFamily.InterNetwork){
